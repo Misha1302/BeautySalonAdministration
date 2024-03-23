@@ -14,7 +14,5 @@ public static class CurAppData
     public static HolidaysForm HolidaysForm = null!;
     public static Form WorkerForm = null!;
 
-    public static Month CurMonth;
-
     public static void Save() => DataManager.SetAdministration(Administration);
 }

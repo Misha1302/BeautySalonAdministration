@@ -13,13 +13,13 @@ public partial class Form2 : Form
 
     private void ShowTable()
     {
-        CurAppData.CurMonth = MonthExtensions.Months[comboBox1.SelectedIndex];
+        var curMonth = MonthExtensions.Months[comboBox1.SelectedIndex];
 
         var arr = CurAppData.Administration.WorkerTypes.Select(x => new DataGridViewRow()).ToArray();
 
-        dataGridView1.ColumnCount = CurAppData.CurMonth.DaysCount();
+        dataGridView1.ColumnCount = curMonth.DaysCount();
         dataGridView1.Columns.ForEach<DataGridViewColumn>((x, i) =>
-            x.HeaderText = $"{i + 1}. {CurAppData.CurMonth.GetDayIndex(i)}. {i.DayOfWeek(CurAppData.CurMonth)}");
+            x.HeaderText = $"{i + 1}. {curMonth.GetDayIndex(i)}. {i.DayOfWeek(curMonth)}");
         dataGridView1.Columns.ForEach<DataGridViewColumn>((x, i) => x.Width = 50);
         dataGridView1.Rows.Clear();
         dataGridView1.Rows.AddRange(arr);
@@ -29,12 +29,12 @@ public partial class Form2 : Form
             x.HeaderCell.Value = CurAppData.Administration.WorkerTypes[i].ToString());
 
         dataGridView1.Rows.ForEach<DataGridViewRow>((x, workerIndex) => x.Cells.ForEach<DataGridViewCell>((x, i) =>
-            x.Style.BackColor = !CurAppData.Manager.Workers[workerIndex].IsDayFull(i, CurAppData.CurMonth)
+            x.Style.BackColor = !CurAppData.Manager.Workers[workerIndex].IsDayFull(i, curMonth)
                 ? Color.White
                 : Color.Red));
 
         dataGridView1.Rows.ForEach<DataGridViewRow>((x, workerIndex) => x.Cells.ForEach<DataGridViewCell>((x, i) =>
-            x.Value = CurAppData.Manager.Workers[workerIndex].IsHoliday(i, CurAppData.CurMonth)
+            x.Value = CurAppData.Manager.Workers[workerIndex].IsHoliday(i, curMonth)
                 ? "В"
                 : ""));
 
