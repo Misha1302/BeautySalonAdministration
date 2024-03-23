@@ -22,16 +22,14 @@ namespace BeautySalonAdministration
         private void button1_Click(object sender, EventArgs e)
         {
             var records = CurDay.Records;
-            Debug.Assert(records != null);
 
             for (int i = 0; i < records.Count; i++)
             {
                 var cells = dataGridView1.Rows[i].Cells;
-                Debug.Assert(cells != null);
 
                 var strings = ((string)cells[1].Value ?? "").Split(" ");
-                Debug.Assert(strings != null);
 
+                bool parsed = int.TryParse((string)cells[3].Value ?? "", out var price);
                 var record = records[i] with
                 {
                     Time = ToTime((string)cells[0].Value ?? ""),
@@ -39,7 +37,7 @@ namespace BeautySalonAdministration
                     Surname = strings.Length > 1 ? strings[1] : "",
                     Patronymic = strings.Length > 2 ? strings[2] : "",
                     PhoneNumber = (string)cells[2].Value ?? "",
-                    Price = int.Parse((string)cells[3].Value ?? "")
+                    Price = parsed ? price : -1
                 };
 
                 records[i] = record;
@@ -70,14 +68,19 @@ namespace BeautySalonAdministration
 
         private void Form3_Activated(object sender, EventArgs e)
         {
+            dataGridView1.AllowUserToAddRows = dataGridView1.AllowUserToDeleteRows = false;
+
             dataGridView1.Columns.Clear();
-            dataGridView1.Rows.Clear();
 
             dataGridView1.Columns.Add("column name", "Время");
+            dataGridView1.Columns[0].ReadOnly = true;
+
             dataGridView1.Columns.Add("column name", "ФИО");
             dataGridView1.Columns.Add("column name", "Номер");
             dataGridView1.Columns.Add("column name", "Цена");
 
+
+            dataGridView1.Rows.Clear();
 
             foreach (var item in CurDay.Records)
             {

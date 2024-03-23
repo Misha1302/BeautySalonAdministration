@@ -1,6 +1,5 @@
 ﻿namespace BeautySalonAdministration;
 
-using BeautySalonAdministration.Logic;
 using BeautySalonAdministration.Logic.Extensions;
 
 public partial class Form2 : Form
