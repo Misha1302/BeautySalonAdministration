@@ -21,11 +21,11 @@ public static class Serializer
     private static List<WorkerDto> MakeWorkers(ManagerAccount manager)
     {
         return manager.Workers
-            .Select(x => new WorkerDto(new WorkerTypeDto(x.WorkerType.Name, x.WorkerType.List), x.Calendar.Days.Select(MakeDay).ToList()))
+            .Select(x => new WorkerDto(new WorkerTypeDto(x.WorkerType.Name, x.WorkerType.List), x.Calendar.Days.Select(MakeDayDto).ToList()))
             .ToList();
     }
 
-    private static DayDto MakeDay(Day day) => new(day.Month, day.Number);
+    private static DayDto MakeDayDto(Day day) => new(day.Month, day.Number, day.Records);
 
 
     public static Administration MakeAdministration(AdministrationDto data)
@@ -68,6 +68,7 @@ public static class Serializer
     private static Day ToDay(DayDto dto, Administration administration)
     {
         var day = new Day(dto.Month, dto.Number, () => administration.IsHoliday(dto.Number, dto.Month));
+        day.Records = dto.Records;
         return day;
     }
 }
@@ -80,4 +81,4 @@ public record WorkerDto(WorkerTypeDto WorkerType, List<DayDto> Days);
 
 public record WorkerTypeDto(string Name, List<string> List);
 
-public record DayDto(Month Month, int Number);
+public record DayDto(Month Month, int Number, List<Record> Records);

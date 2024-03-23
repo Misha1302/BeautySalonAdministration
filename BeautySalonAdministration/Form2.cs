@@ -72,4 +72,15 @@ public partial class Form2 : Form
     {
         CurAppData.WorkerForm.Show();
     }
+
+    private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+    {
+        var pos = (dataGridView1.SelectedCells[0].ColumnIndex, dataGridView1.SelectedCells[0].RowIndex);
+        CurAppData.RealtimeData.Pos = pos;
+
+        CurAppData.Form3.Show();
+
+        CurAppData.Form3.NeedToRerender -= ShowTable;
+        CurAppData.Form3.NeedToRerender += ShowTable;
+    }
 }

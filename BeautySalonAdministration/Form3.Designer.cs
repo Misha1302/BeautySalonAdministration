@@ -1,6 +1,6 @@
 ﻿namespace BeautySalonAdministration
 {
-    partial class Form2
+    partial class Form3
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            comboBox1 = new ComboBox();
+            label2 = new Label();
             dataGridView1 = new DataGridView();
+            textBox1 = new TextBox();
+            comboBox1 = new ComboBox();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
             button1 = new Button();
-            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -41,66 +44,86 @@
             label1.AutoSize = true;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(141, 25);
+            label1.Size = new Size(59, 25);
             label1.TabIndex = 0;
-            label1.Text = "...Admin Name...";
+            label1.Text = "label1";
             // 
-            // comboBox1
+            // label2
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.ImeMode = ImeMode.NoControl;
-            comboBox1.Items.AddRange(new object[] { "Январь", "Февраль", "Март ", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" });
-            comboBox1.Location = new Point(606, 12);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(182, 33);
-            comboBox1.TabIndex = 1;
+            label2.AutoSize = true;
+            label2.Location = new Point(729, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 25);
+            label2.TabIndex = 1;
+            label2.Text = "label2";
             // 
             // dataGridView1
             // 
-            dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 51);
+            dataGridView1.Location = new Point(12, 37);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(776, 252);
+            dataGridView1.Size = new Size(776, 225);
             dataGridView1.TabIndex = 2;
-            dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 268);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(182, 31);
+            textBox1.TabIndex = 3;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(12, 305);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(182, 33);
+            comboBox1.TabIndex = 4;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(200, 268);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(182, 31);
+            textBox2.TabIndex = 5;
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(200, 305);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(182, 31);
+            textBox3.TabIndex = 6;
             // 
             // button1
             // 
-            button1.Location = new Point(12, 309);
+            button1.Location = new Point(12, 404);
             button1.Name = "button1";
-            button1.Size = new Size(194, 34);
-            button1.TabIndex = 3;
-            button1.Text = "Добавить выходной";
+            button1.Size = new Size(370, 34);
+            button1.TabIndex = 7;
+            button1.Text = "Сохранить";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // button2
-            // 
-            button2.Location = new Point(212, 309);
-            button2.Name = "button2";
-            button2.Size = new Size(194, 34);
-            button2.TabIndex = 4;
-            button2.Text = "Добавить работника";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // Form2
+            // Form3
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(dataGridView1);
+            Controls.Add(textBox3);
+            Controls.Add(textBox2);
             Controls.Add(comboBox1);
+            Controls.Add(textBox1);
+            Controls.Add(dataGridView1);
+            Controls.Add(label2);
             Controls.Add(label1);
-            Name = "Form2";
-            Text = "Form2";
-            FormClosing += Form2_FormClosing;
-            Load += Form2_Load;
+            Name = "Form3";
+            Text = "Form3";
+            Activated += Form3_Activated;
+            FormClosing += Form3_FormClosing;
+            Load += Form3_Load;
+            Shown += Form3_Shown;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -109,9 +132,12 @@
         #endregion
 
         private Label label1;
-        private ComboBox comboBox1;
+        private Label label2;
         private DataGridView dataGridView1;
+        private TextBox textBox1;
+        private ComboBox comboBox1;
+        private TextBox textBox2;
+        private TextBox textBox3;
         private Button button1;
-        private Button button2;
     }
 }

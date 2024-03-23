@@ -9,10 +9,15 @@ public record Record(
     string Surname,
     string Patronymic,
     string PhoneNumber,
-    int Price,
-    bool IsNull = false)
+    int Price)
 {
-    public Record(float time) : this(time, string.Empty, string.Empty, string.Empty, string.Empty, -1, true)
+    public bool IsNull => Time < 0 || Price < 0 || (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Surname) && string.IsNullOrEmpty(Patronymic));
+
+    public Record(float time) : this(time, string.Empty, string.Empty, string.Empty, string.Empty, -1)
+    {
+    }
+
+    public Record() : this(-1)
     {
     }
 
