@@ -11,8 +11,10 @@ public partial class Form1 : Form
         CurAppData.Form1 = this;
         CurAppData.Form2 = new Form2();
         CurAppData.HolidaysForm = new HolidaysForm();
+        CurAppData.WorkerForm = new WorkerForm();
         // CurAppData.Form3 = new Form3();
 
+        CurAppData.WorkerForm.Hide();
         CurAppData.Form2.Hide();
         CurAppData.HolidaysForm.Hide();
         // CurAppData.Form3.Hide();

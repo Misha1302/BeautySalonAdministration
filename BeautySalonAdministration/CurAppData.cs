@@ -1,6 +1,7 @@
 ﻿namespace BeautySalonAdministration;
 
 using BeautySalonAdministration.Logic;
+using System;
 
 public static class CurAppData
 {
@@ -11,6 +12,9 @@ public static class CurAppData
     public static Form Form2 = null!;
     public static Form Form3 = null!;
     public static HolidaysForm HolidaysForm = null!;
+    public static Form WorkerForm = null!;
 
     public static Month CurMonth;
+
+    public static void Save() => DataManager.SetAdministration(Administration);
 }

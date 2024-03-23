@@ -1,6 +1,6 @@
 ﻿namespace BeautySalonAdministration
 {
-    partial class Form2
+    partial class WorkerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,88 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             comboBox1 = new ComboBox();
-            dataGridView1 = new DataGridView();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
             button1 = new Button();
             button2 = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(141, 25);
-            label1.TabIndex = 0;
-            label1.Text = "...Admin Name...";
             // 
             // comboBox1
             // 
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
-            comboBox1.ImeMode = ImeMode.NoControl;
-            comboBox1.Items.AddRange(new object[] { "Январь", "Февраль", "Март ", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" });
-            comboBox1.Location = new Point(606, 12);
+            comboBox1.Location = new Point(286, 12);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(182, 33);
-            comboBox1.TabIndex = 1;
+            comboBox1.TabIndex = 0;
             // 
-            // dataGridView1
+            // textBox1
             // 
-            dataGridView1.AllowUserToOrderColumns = true;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 51);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(776, 252);
-            dataGridView1.TabIndex = 2;
+            textBox1.Location = new Point(12, 12);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(182, 31);
+            textBox1.TabIndex = 1;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(12, 49);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(182, 115);
+            textBox2.TabIndex = 2;
             // 
             // button1
             // 
-            button1.Location = new Point(12, 309);
+            button1.Location = new Point(12, 170);
             button1.Name = "button1";
-            button1.Size = new Size(194, 34);
+            button1.Size = new Size(182, 34);
             button1.TabIndex = 3;
-            button1.Text = "Добавить выходной";
+            button1.Text = "Создать работника";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(212, 309);
+            button2.Location = new Point(286, 51);
             button2.Name = "button2";
-            button2.Size = new Size(194, 34);
+            button2.Size = new Size(182, 34);
             button2.TabIndex = 4;
-            button2.Text = "Добавить работника";
+            button2.Text = "Удалить работника";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // Form2
+            // WorkerForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(483, 217);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(dataGridView1);
+            Controls.Add(textBox2);
+            Controls.Add(textBox1);
             Controls.Add(comboBox1);
-            Controls.Add(label1);
-            Name = "Form2";
-            Text = "Form2";
-            FormClosing += Form2_FormClosing;
-            Load += Form2_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Name = "WorkerForm";
+            Text = "WorkerForm";
+            Load += WorkerForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
         private ComboBox comboBox1;
-        private DataGridView dataGridView1;
+        private TextBox textBox1;
+        private TextBox textBox2;
         private Button button1;
         private Button button2;
     }

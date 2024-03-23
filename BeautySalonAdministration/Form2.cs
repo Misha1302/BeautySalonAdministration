@@ -53,15 +53,10 @@ public partial class Form2 : Form
         CurAppData.HolidaysForm.Show();
 
         CurAppData.HolidaysForm.OnNeedToRerender -= ShowTable;
-        CurAppData.HolidaysForm.OnNeedToRerender -= Save;
+        CurAppData.HolidaysForm.OnNeedToRerender -= CurAppData.Save;
 
         CurAppData.HolidaysForm.OnNeedToRerender += ShowTable;
-        CurAppData.HolidaysForm.OnNeedToRerender += Save;
-    }
-
-    private static void Save()
-    {
-        DataManager.SetAdministration(CurAppData.Administration);
+        CurAppData.HolidaysForm.OnNeedToRerender += CurAppData.Save;
     }
 
     private void Form2_FormClosing(object sender, FormClosingEventArgs e)
@@ -71,5 +66,10 @@ public partial class Form2 : Form
             e.Cancel = true;
             Hide();
         }
+    }
+
+    private void button2_Click(object sender, EventArgs e)
+    {
+        CurAppData.WorkerForm.Show();
     }
 }

@@ -7,13 +7,13 @@ public class Administration
     public List<ManagerAccount> Managers;
     public bool[] Holidays = new bool[366];
 
-    public readonly List<WorkerType> WorkerTypes =
+    public List<WorkerType> WorkerTypes =
     [
-        new WorkerType("Маникюр"),
-        new WorkerType("Педикюр"),
-        new WorkerType("Парикмахер"),
-        new WorkerType("Брови"),
-        new WorkerType("Визажист")
+        new WorkerType("Маникюр", ["Наращивание", "Гель", "Маникюр"]),
+        new WorkerType("Педикюр", ["X1", "X2", "X3"]),
+        new WorkerType("Парикмахер", ["Y1", "Y2", "Y3"]),
+        new WorkerType("Брови", ["Z1", "Z2", "Z3"]),
+        new WorkerType("Визажист", ["W1", "W2", "W3"])
     ];
 
     public Administration()

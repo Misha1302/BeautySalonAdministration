@@ -13,6 +13,7 @@ public static class CollectionExtensions
 
     public static void ForEach<T>(this IList arr, Action<T, int> action)
     {
-        for (var i = 0; i < arr.Count; i++) action((T)arr[i]!, i);
+        for (var i = 0; i < arr.Count; i++)
+            action((T)arr[i]!, i);
     }
 }

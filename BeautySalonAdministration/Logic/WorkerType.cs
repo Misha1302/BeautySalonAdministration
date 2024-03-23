@@ -1,8 +1,10 @@
 ﻿namespace BeautySalonAdministration.Logic;
 
-public class WorkerType(string name)
+public class WorkerType(string name, List<string> list)
 {
-    public readonly string Name = name;
+    public string Name = name;
+    public List<string> List = list;
+
 
     public override bool Equals(object? obj) => obj is WorkerType wt && Name == wt.Name;
 

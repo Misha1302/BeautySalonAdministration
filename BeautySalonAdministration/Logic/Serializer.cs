@@ -1,3 +1,5 @@
+
+
 namespace BeautySalonAdministration.Logic;
 
 public static class Serializer
@@ -6,15 +8,20 @@ public static class Serializer
     {
         var holidays = data.Holidays;
         var managers = data.Managers.Select(x => new ManagerDto(x.Login, x.Password, MakeWorkers(x))).ToList();
-        var result = new AdministrationDto(holidays, managers);
+        var result = new AdministrationDto(holidays, managers, data.WorkerTypes.Select(MakeWorkerTypeDto).ToList());
 
         return result;
+    }
+
+    private static WorkerTypeDto MakeWorkerTypeDto(WorkerType type)
+    {
+        return new WorkerTypeDto(type.Name, type.List);
     }
 
     private static List<WorkerDto> MakeWorkers(ManagerAccount manager)
     {
         return manager.Workers
-            .Select(x => new WorkerDto(new WorkerTypeDto(x.WorkerType.Name), x.Calendar.Days.Select(MakeDay).ToList()))
+            .Select(x => new WorkerDto(new WorkerTypeDto(x.WorkerType.Name, x.WorkerType.List), x.Calendar.Days.Select(MakeDay).ToList()))
             .ToList();
     }
 
@@ -25,12 +32,18 @@ public static class Serializer
     {
         var adm = new Administration
         {
-            Holidays = data.Holidays
+            Holidays = data.Holidays,
+            WorkerTypes = data.WorkerTypes.Select(MakeWorkerType).ToList()
         };
 
         adm.Managers = data.Managers.Select(dto => MakeManager(dto, adm)).ToList();
 
         return adm;
+    }
+
+    private static WorkerType MakeWorkerType(WorkerTypeDto dto)
+    {
+        return new WorkerType(dto.Name, dto.List);
     }
 
     private static ManagerAccount MakeManager(ManagerDto dto, Administration administration)
@@ -42,7 +55,7 @@ public static class Serializer
 
     private static Worker MakeWorker(WorkerDto dto, Administration administration)
     {
-        var worker = new Worker(new WorkerType(dto.WorkerType.Name), new Calendar())
+        var worker = new Worker(new WorkerType(dto.WorkerType.Name, dto.WorkerType.List), new Calendar())
         {
             Calendar =
             {
@@ -59,12 +72,12 @@ public static class Serializer
     }
 }
 
-public record AdministrationDto(bool[] Holidays, List<ManagerDto> Managers);
+public record AdministrationDto(bool[] Holidays, List<ManagerDto> Managers, List<WorkerTypeDto> WorkerTypes);
 
 public record ManagerDto(string Login, string Password, List<WorkerDto> Workers);
 
 public record WorkerDto(WorkerTypeDto WorkerType, List<DayDto> Days);
 
-public record WorkerTypeDto(string Name);
+public record WorkerTypeDto(string Name, List<string> List);
 
 public record DayDto(Month Month, int Number);
