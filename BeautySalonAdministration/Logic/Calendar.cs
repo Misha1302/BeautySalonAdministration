@@ -4,12 +4,16 @@ using BeautySalonAdministration.Logic.Extensions;
 
 public class Calendar
 {
-    public readonly List<Day> Days = [];
+    public List<Day> Days = [];
 
     public Calendar(Predicate<int> isHoliday)
     {
         foreach (var month in MonthExtensions.Months)
             month.DaysCount().Do(i => Days.Add(new Day(month, i, isHoliday, month.GetDayIndex(i))));
+    }
+
+    public Calendar()
+    {
     }
 
     public Day Get(Month month, int day)

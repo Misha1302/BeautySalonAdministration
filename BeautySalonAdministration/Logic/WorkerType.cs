@@ -2,19 +2,13 @@
 
 public class WorkerType(string name)
 {
-    private readonly string _name = name;
+    public readonly string Name = name;
 
-    public override bool Equals(object? obj)
-    {
-        if (obj is not WorkerType wt)
-            return false;
+    public override bool Equals(object? obj) => obj is WorkerType wt && Name == wt.Name;
 
-        return _name == wt._name;
-    }
+    protected bool Equals(WorkerType other) => Name == other.Name;
 
-    protected bool Equals(WorkerType other) => _name == other._name;
+    public override int GetHashCode() => HashCode.Combine(Name);
 
-    public override int GetHashCode() => HashCode.Combine(_name);
-
-    public override string ToString() => _name;
+    public override string ToString() => Name;
 }

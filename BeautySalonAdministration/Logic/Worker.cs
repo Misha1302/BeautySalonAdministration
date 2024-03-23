@@ -2,10 +2,10 @@
 
 using BeautySalonAdministration.Logic.Extensions;
 
-public class Worker(WorkerType workerType, Predicate<int> isHoliday)
+public class Worker(WorkerType workerType, Calendar calendar)
 {
-    public WorkerType WorkerType = workerType;
-    private readonly Calendar _calendar = new(isHoliday);
+    public readonly WorkerType WorkerType = workerType;
+    public readonly Calendar Calendar = calendar;
 
-    public bool IsDayFull(int i, Month month) => !_calendar.Days[month.GetDayIndex(i)].IsHoliday;
+    public bool IsDayFull(int i, Month month) => !Calendar.Days[month.GetDayIndex(i)].IsHoliday;
 }

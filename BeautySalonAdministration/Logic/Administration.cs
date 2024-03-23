@@ -2,12 +2,15 @@
 
 public class Administration
 {
-    public readonly List<ManagerAccount> Managers;
-    public readonly bool[] Holidays = new bool[366];
+    public List<ManagerAccount> Managers;
+    public bool[] Holidays = new bool[366];
 
     public readonly List<WorkerType> WorkerTypes =
     [
-        new WorkerType("Маникюр"), new WorkerType("Педикюр"), new WorkerType("Парикмахер"), new WorkerType("Брови"),
+        new WorkerType("Маникюр"),
+        new WorkerType("Педикюр"),
+        new WorkerType("Парикмахер"),
+        new WorkerType("Брови"),
         new WorkerType("Визажист")
     ];
 
@@ -16,8 +19,8 @@ public class Administration
         Managers = [new ManagerAccount("логин", "пароль", WorkerTypes.Select(CreateWorker).ToList())];
     }
 
-    private Worker CreateWorker(WorkerType x)
+    private Worker CreateWorker(WorkerType workerType)
     {
-        return new Worker(x, x => Holidays[x]);
+        return new Worker(workerType, new Calendar(x => Holidays[x]));
     }
 }

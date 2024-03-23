@@ -8,8 +8,4 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="UniversalSerializer.Windows.Forms" Version="3.18.4.16"/>
-    </ItemGroup>
-
 </Project>

@@ -1,6 +1,6 @@
 ﻿namespace BeautySalonAdministration.Logic;
 
-using UniversalSerializerLib3;
+using System.Text.Json;
 
 public static class DataManager
 {
@@ -20,21 +20,25 @@ public static class DataManager
 
     public static Administration GetAdministration()
     {
-        using var ser = new UniversalSerializer(_dataTxt);
         try
         {
-            return ser.Deserialize<Administration>();
+            var dto = JsonSerializer.Deserialize<AdministrationDto>(File.ReadAllText(_dataTxt));
+
+            return dto?.Holidays == null
+                ? new Administration()
+                : Serializer.MakeAdministration(dto);
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.ToString());
+            MessageBox.Show(ex.ToString(), $"Попробуйте удалить файл {_dataTxt}");
             return new Administration();
         }
     }
 
     public static void SetAdministration(Administration administration)
     {
-        using var ser = new UniversalSerializer(_dataTxt);
-        ser.Serialize(administration);
+        var a = JsonSerializer.Serialize(Serializer.MakeDto(administration));
+
+        File.WriteAllText(_dataTxt, a);
     }
 }

@@ -29,7 +29,8 @@ public partial class Form2 : Form
             x.HeaderCell.Value = CurAppData.Administration.WorkerTypes[i].ToString());
 
         dataGridView1.Rows.ForEach<DataGridViewRow>((row, _) =>
-            row.Cells.ForEach<DataGridViewCell>((cell, i) => cell.Value = i.IsWorkableDay(CurAppData.CurMonth) ? "" : "В"));
+            row.Cells.ForEach<DataGridViewCell>((cell, i) =>
+                cell.Value = i.IsWorkableDay(CurAppData.CurMonth) ? "" : "В"));
 
         dataGridView1.Rows.ForEach<DataGridViewRow>((x, workerIndex) => x.Cells.ForEach<DataGridViewCell>((x, i) =>
             x.Style.BackColor = CurAppData.Manager.Workers[workerIndex].IsDayFull(i, CurAppData.CurMonth)
