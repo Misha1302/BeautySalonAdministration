@@ -43,7 +43,8 @@ public partial class HolidaysForm : Form
         var end = int.Parse(comboBox3.Text);
         var month = MonthExtensions.Months[comboBox1.SelectedIndex];
 
-        for (var i = start; i < end + 1; i++) CurAppData.Administration.Holidays[month.GetDayIndex(i - 1)] = active;
+        for (var i = start; i <= end; i++) 
+            CurAppData.Administration.Holidays[month.GetDayIndex(i - 1)] = active;
 
         OnNeedToRerender?.Invoke();
     }

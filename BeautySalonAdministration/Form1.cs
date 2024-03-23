@@ -21,7 +21,7 @@ public partial class Form1 : Form
     private void button1_Click(object sender, EventArgs e)
     {
         var manager =
-            CurAppData.Administration.Managers.Find(x => x.Name == textBox1.Text && x.Password == textBox2.Text);
+            CurAppData.Administration.Managers.Find(x => x.Login == textBox1.Text && x.Password == textBox2.Text);
         if (manager == null)
         {
             MessageBox.Show($"Не удалось найти менеджера с логином '{textBox1.Text}' и паролем '{textBox2.Text}'");

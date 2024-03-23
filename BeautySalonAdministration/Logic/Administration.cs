@@ -1,4 +1,6 @@
-﻿namespace BeautySalonAdministration.Logic;
+﻿using BeautySalonAdministration.Logic.Extensions;
+
+namespace BeautySalonAdministration.Logic;
 
 public class Administration
 {
@@ -21,6 +23,12 @@ public class Administration
 
     private Worker CreateWorker(WorkerType workerType)
     {
-        return new Worker(workerType, new Calendar(x => Holidays[x]));
+        return new Worker(workerType, new Calendar(IsHoliday));
+    }
+
+    public bool IsHoliday(int x, Month month)
+    {
+        int ind = month.GetDayIndex(x);
+        return Holidays[ind] || !ind.IsWorkableDay(month);
     }
 }

@@ -19,7 +19,7 @@ public partial class Form2 : Form
 
         dataGridView1.ColumnCount = CurAppData.CurMonth.DaysCount();
         dataGridView1.Columns.ForEach<DataGridViewColumn>((x, i) =>
-            x.HeaderText = $"{i + 1}. {i.DayOfWeek(CurAppData.CurMonth)}");
+            x.HeaderText = $"{i + 1}. {CurAppData.CurMonth.GetDayIndex(i)}. {i.DayOfWeek(CurAppData.CurMonth)}");
         dataGridView1.Columns.ForEach<DataGridViewColumn>((x, i) => x.Width = 50);
         dataGridView1.Rows.Clear();
         dataGridView1.Rows.AddRange(arr);
@@ -28,20 +28,22 @@ public partial class Form2 : Form
         dataGridView1.Rows.ForEach<DataGridViewRow>((x, i) =>
             x.HeaderCell.Value = CurAppData.Administration.WorkerTypes[i].ToString());
 
-        dataGridView1.Rows.ForEach<DataGridViewRow>((row, _) =>
-            row.Cells.ForEach<DataGridViewCell>((cell, i) =>
-                cell.Value = i.IsWorkableDay(CurAppData.CurMonth) ? "" : "В"));
-
         dataGridView1.Rows.ForEach<DataGridViewRow>((x, workerIndex) => x.Cells.ForEach<DataGridViewCell>((x, i) =>
-            x.Style.BackColor = CurAppData.Manager.Workers[workerIndex].IsDayFull(i, CurAppData.CurMonth)
+            x.Style.BackColor = !CurAppData.Manager.Workers[workerIndex].IsDayFull(i, CurAppData.CurMonth)
                 ? Color.White
                 : Color.Red));
+
+        dataGridView1.Rows.ForEach<DataGridViewRow>((x, workerIndex) => x.Cells.ForEach<DataGridViewCell>((x, i) =>
+            x.Value = CurAppData.Manager.Workers[workerIndex].IsHoliday(i, CurAppData.CurMonth)
+                ? "В"
+                : ""));
 
         dataGridView1.RowHeadersWidth = 150;
     }
 
     private void Form2_Load(object sender, EventArgs e)
     {
+        label1.Text = CurAppData.Manager.Login;
         comboBox1.SelectedIndexChanged += (_, _) => ShowTable();
         comboBox1.SelectedIndex = 0;
     }

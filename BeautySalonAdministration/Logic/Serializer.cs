@@ -5,7 +5,7 @@ public static class Serializer
     public static AdministrationDto MakeDto(Administration data)
     {
         var holidays = data.Holidays;
-        var managers = data.Managers.Select(x => new ManagerDto(x.Name, x.Password, MakeWorkers(x))).ToList();
+        var managers = data.Managers.Select(x => new ManagerDto(x.Login, x.Password, MakeWorkers(x))).ToList();
         var result = new AdministrationDto(holidays, managers);
 
         return result;
@@ -18,7 +18,7 @@ public static class Serializer
             .ToList();
     }
 
-    private static DayDto MakeDay(Day day) => new(day.Month, day.Number, day.AbsoluteIndex);
+    private static DayDto MakeDay(Day day) => new(day.Month, day.Number);
 
 
     public static Administration MakeAdministration(AdministrationDto data)
@@ -54,7 +54,7 @@ public static class Serializer
 
     private static Day ToDay(DayDto dto, Administration administration)
     {
-        var day = new Day(dto.Month, dto.Number, x => administration.Holidays[x], dto.AbsoluteIndex);
+        var day = new Day(dto.Month, dto.Number, () => administration.IsHoliday(dto.Number, dto.Month));
         return day;
     }
 }
@@ -67,4 +67,4 @@ public record WorkerDto(WorkerTypeDto WorkerType, List<DayDto> Days);
 
 public record WorkerTypeDto(string Name);
 
-public record DayDto(Month Month, int Number, int AbsoluteIndex);
+public record DayDto(Month Month, int Number);
