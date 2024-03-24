@@ -1,5 +1,6 @@
 ﻿using BeautySalonAdministration.Logic.Extensions;
 using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace BeautySalonAdministration
@@ -127,6 +128,45 @@ namespace BeautySalonAdministration
             CurAppData.RealtimeData.Pos.ColumnIndex = Math.Clamp(CurAppData.RealtimeData.Pos.ColumnIndex + index, 0, CurAppData.RealtimeData.Month.DaysCount() - 1);
             CurAppData.Form3.Hide();
             CurAppData.Form3.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new Form3Printer(this).Print();
+        }
+    }
+
+    public class Form3Printer
+    {
+        private PrintDocument printDocument1 = new PrintDocument();
+        Bitmap memoryImage;
+
+        public Form3Printer(Form form)
+        {
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            Form = form;
+        }
+
+        public Form Form { get; }
+
+        public void Print()
+        {
+            CaptureScreen();
+            printDocument1.Print();
+        }
+
+        private void CaptureScreen()
+        {
+            Graphics myGraphics = Form.CreateGraphics();
+            Size s = Form.Size;
+            memoryImage = new Bitmap(s.Width, s.Height, myGraphics);
+            Graphics memoryGraphics = Graphics.FromImage(memoryImage);
+            memoryGraphics.CopyFromScreen(Form.Location.X, Form.Location.Y, 0, 0, s);
+        }
+
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(memoryImage, 0, 0);
         }
     }
 }

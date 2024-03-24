@@ -35,6 +35,7 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
+            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -104,11 +105,22 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // button4
+            // 
+            button4.Location = new Point(130, 308);
+            button4.Name = "button4";
+            button4.Size = new Size(456, 34);
+            button4.TabIndex = 10;
+            button4.Text = "Печать дня";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(716, 311);
+            ClientSize = new Size(716, 353);
+            Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -136,5 +148,6 @@
         private DataGridViewTextBoxColumn Column1;
         private Button button2;
         private Button button3;
+        private Button button4;
     }
 }
