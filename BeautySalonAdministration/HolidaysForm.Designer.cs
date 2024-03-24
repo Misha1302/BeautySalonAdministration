@@ -104,6 +104,7 @@
             Controls.Add(comboBox2);
             Controls.Add(comboBox1);
             Controls.Add(label1);
+            MaximizeBox = false;
             Name = "HolidaysForm";
             Text = "HolidaysForm";
             FormClosing += HolidaysForm_FormClosing;

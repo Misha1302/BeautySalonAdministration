@@ -8,7 +8,7 @@ public static class Serializer
     {
         var holidays = data.Holidays;
         var managers = data.Managers.Select(x => new ManagerDto(x.Login, x.Password, MakeWorkers(x))).ToList();
-        var result = new AdministrationDto(holidays, managers, data.WorkerTypes.Select(MakeWorkerTypeDto).ToList());
+        var result = new AdministrationDto(holidays, managers, data.GetWorkerTypes().Select(MakeWorkerTypeDto).ToList());
 
         return result;
     }
@@ -20,7 +20,7 @@ public static class Serializer
 
     private static List<WorkerDto> MakeWorkers(ManagerAccount manager)
     {
-        return manager.Workers
+        return manager.GetWorkers()
             .Select(x => new WorkerDto(new WorkerTypeDto(x.WorkerType.Name, x.WorkerType.List), x.Calendar.Days.Select(MakeDayDto).ToList()))
             .ToList();
     }
@@ -30,11 +30,11 @@ public static class Serializer
 
     public static Administration MakeAdministration(AdministrationDto data)
     {
-        var adm = new Administration
-        {
-            Holidays = data.Holidays,
-            WorkerTypes = data.WorkerTypes.Select(MakeWorkerType).ToList()
-        };
+        var adm = Administration.MakeAdm(false);
+        adm.Holidays = data.Holidays;
+
+        // foreach (var item in adm.GetWorkerTypes().ToList()) adm.RemoveWorkerType(item.Name);
+        foreach (var item in data.WorkerTypes.Select(MakeWorkerType)) adm.AddWorkerType(item);
 
         adm.Managers = data.Managers.Select(dto => MakeManager(dto, adm)).ToList();
 

@@ -15,7 +15,7 @@ public static class DataManager
     private static void EnsureFileWasCreated()
     {
         if (!File.Exists(_dataTxt))
-            SetAdministration(new Administration());
+            SetAdministration(Administration.MakeAdm(true));
     }
 
     public static Administration GetAdministration()
@@ -25,19 +25,19 @@ public static class DataManager
             var dto = JsonSerializer.Deserialize<AdministrationDto>(File.ReadAllText(_dataTxt));
 
             return dto?.Holidays == null
-                ? new Administration()
+                ? Administration.MakeAdm(true)
                 : Serializer.MakeAdministration(dto);
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.ToString(), $"Попробуйте удалить файл {_dataTxt}");
-            return new Administration();
+            return Administration.MakeAdm(true);
         }
     }
 
     public static void SetAdministration(Administration administration)
     {
-        var a = JsonSerializer.Serialize(Serializer.MakeDto(administration));
+        var a = JsonSerializer.Serialize(Serializer.MakeDto(administration), new JsonSerializerOptions { WriteIndented = true });
 
         File.WriteAllText(_dataTxt, a);
     }

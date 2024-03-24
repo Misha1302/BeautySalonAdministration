@@ -31,8 +31,10 @@
             label1 = new Label();
             label2 = new Label();
             dataGridView1 = new DataGridView();
-            button1 = new Button();
             Column1 = new DataGridViewTextBoxColumn();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -48,8 +50,9 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(644, 9);
+            label2.Location = new Point(592, 9);
             label2.Name = "label2";
+            label2.RightToLeft = RightToLeft.No;
             label2.Size = new Size(59, 25);
             label2.TabIndex = 1;
             label2.Text = "label2";
@@ -64,16 +67,6 @@
             dataGridView1.Size = new Size(691, 225);
             dataGridView1.TabIndex = 2;
             // 
-            // button1
-            // 
-            button1.Location = new Point(12, 268);
-            button1.Name = "button1";
-            button1.Size = new Size(691, 34);
-            button1.TabIndex = 7;
-            button1.Text = "Сохранить";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // Column1
             // 
             Column1.HeaderText = "Column1";
@@ -81,15 +74,48 @@
             Column1.Name = "Column1";
             Column1.Width = 150;
             // 
+            // button1
+            // 
+            button1.Location = new Point(130, 268);
+            button1.Name = "button1";
+            button1.Size = new Size(456, 34);
+            button1.TabIndex = 7;
+            button1.Text = "Сохранить";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(592, 268);
+            button2.Name = "button2";
+            button2.Size = new Size(112, 34);
+            button2.TabIndex = 8;
+            button2.Text = "=>";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(12, 268);
+            button3.Name = "button3";
+            button3.Size = new Size(112, 34);
+            button3.TabIndex = 9;
+            button3.Text = "<=";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(716, 311);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(label2);
             Controls.Add(label1);
+            MaximizeBox = false;
             Name = "Form3";
             Text = "Form3";
             Activated += Form3_Activated;
@@ -108,5 +134,7 @@
         private DataGridView dataGridView1;
         private Button button1;
         private DataGridViewTextBoxColumn Column1;
+        private Button button2;
+        private Button button3;
     }
 }

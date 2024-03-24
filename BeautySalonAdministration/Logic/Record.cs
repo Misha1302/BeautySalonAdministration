@@ -5,15 +5,16 @@ namespace BeautySalonAdministration.Logic;
 [DebuggerDisplay("{ToString()}")]
 public record Record(
     float Time,
+    string ServiceType,
     string Name,
     string Surname,
     string Patronymic,
     string PhoneNumber,
     int Price)
 {
-    public bool IsNull => Time < 0 || Price < 0 || (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Surname) && string.IsNullOrEmpty(Patronymic));
+    public bool IsNull => Time < 0 || Price < 0 || string.IsNullOrEmpty(ServiceType) || (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Surname) && string.IsNullOrEmpty(Patronymic));
 
-    public Record(float time) : this(time, string.Empty, string.Empty, string.Empty, string.Empty, -1)
+    public Record(float time) : this(time, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, -1)
     {
     }
 

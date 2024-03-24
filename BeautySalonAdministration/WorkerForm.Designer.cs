@@ -89,8 +89,10 @@
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(comboBox1);
+            MaximizeBox = false;
             Name = "WorkerForm";
             Text = "WorkerForm";
+            FormClosing += WorkerForm_FormClosing;
             Load += WorkerForm_Load;
             ResumeLayout(false);
             PerformLayout();

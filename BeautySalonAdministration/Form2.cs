@@ -14,26 +14,27 @@ public partial class Form2 : Form
     {
         var curMonth = MonthExtensions.Months[comboBox1.SelectedIndex];
 
-        var arr = CurAppData.Administration.WorkerTypes.Select(x => new DataGridViewRow()).ToArray();
+        var arr = CurAppData.Manager.GetWorkers().Select(x => new DataGridViewRow()).ToArray();
+
 
         dataGridView1.ColumnCount = curMonth.DaysCount();
         dataGridView1.Columns.ForEach<DataGridViewColumn>((x, i) =>
-            x.HeaderText = $"{i + 1}. {curMonth.GetDayIndex(i)}. {i.DayOfWeek(curMonth)}");
+            x.HeaderText = $"{i + 1}. {i.DayOfWeek(curMonth)}");
         dataGridView1.Columns.ForEach<DataGridViewColumn>((x, i) => x.Width = 50);
         dataGridView1.Rows.Clear();
         dataGridView1.Rows.AddRange(arr);
         dataGridView1.Rows.RemoveAt(0);
 
         dataGridView1.Rows.ForEach<DataGridViewRow>((x, i) =>
-            x.HeaderCell.Value = CurAppData.Administration.WorkerTypes[i].ToString());
+            x.HeaderCell.Value = CurAppData.Manager.GetWorker(i).WorkerType.ToString());
 
         dataGridView1.Rows.ForEach<DataGridViewRow>((x, workerIndex) => x.Cells.ForEach<DataGridViewCell>((x, i) =>
-            x.Style.BackColor = !CurAppData.Manager.Workers[workerIndex].IsDayFull(i, curMonth)
+            x.Style.BackColor = !CurAppData.Manager.GetWorker(workerIndex).IsDayFull(i, curMonth)
                 ? Color.White
                 : Color.Red));
 
         dataGridView1.Rows.ForEach<DataGridViewRow>((x, workerIndex) => x.Cells.ForEach<DataGridViewCell>((x, i) =>
-            x.Value = CurAppData.Manager.Workers[workerIndex].IsHoliday(i, curMonth)
+            x.Value = CurAppData.Manager.GetWorker(workerIndex).IsHoliday(i, curMonth)
                 ? "В"
                 : ""));
 
@@ -70,6 +71,9 @@ public partial class Form2 : Form
     private void button2_Click(object sender, EventArgs e)
     {
         CurAppData.WorkerForm.Show();
+
+        CurAppData.WorkerForm.NeedToRerender -= ShowTable;
+        CurAppData.WorkerForm.NeedToRerender += ShowTable;
     }
 
     private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

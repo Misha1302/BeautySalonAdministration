@@ -1,6 +1,6 @@
 ﻿namespace BeautySalonAdministration.Logic;
 
-public class WorkerType(string name, List<string> list)
+public class WorkerType(string name, List<string> list) : IComparable<WorkerType>
 {
     public string Name = name;
     public List<string> List = list;
@@ -13,4 +13,7 @@ public class WorkerType(string name, List<string> list)
     public override int GetHashCode() => HashCode.Combine(Name);
 
     public override string ToString() => Name;
+
+
+    public int CompareTo(WorkerType? other) => string.Compare(other?.Name, Name);
 }

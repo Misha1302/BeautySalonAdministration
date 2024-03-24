@@ -1,5 +1,6 @@
 ﻿using BeautySalonAdministration.Logic.Extensions;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace BeautySalonAdministration
 {
@@ -7,7 +8,7 @@ namespace BeautySalonAdministration
     {
         public Action? NeedToRerender;
 
-        private static Logic.Day CurDay => CurAppData.Manager.Workers[CurAppData.RealtimeData.Pos.RowIndex].Calendar.Days[CurAppData.RealtimeData.Month.GetDayIndex(CurAppData.RealtimeData.Pos.ColumnIndex)];
+        private static Logic.Day CurDay => CurAppData.Manager.GetWorker(CurAppData.RealtimeData.Pos.RowIndex).Calendar.Days[CurAppData.RealtimeData.Month.GetDayIndex(CurAppData.RealtimeData.Pos.ColumnIndex)];
 
         public Form3()
         {
@@ -27,16 +28,17 @@ namespace BeautySalonAdministration
             {
                 var cells = dataGridView1.Rows[i].Cells;
 
-                var strings = ((string)cells[1].Value ?? "").Split(" ");
+                var strings = ((string)cells[2].Value ?? "").Split(" ");
 
-                bool parsed = int.TryParse((string)cells[3].Value ?? "", out var price);
+                bool parsed = int.TryParse((string)cells[4].Value ?? "", out var price);
                 var record = records[i] with
                 {
                     Time = ToTime((string)cells[0].Value ?? ""),
+                    ServiceType = (string)cells[1].Value ?? "",
                     Name = strings.Length > 0 ? strings[0] : "",
                     Surname = strings.Length > 1 ? strings[1] : "",
                     Patronymic = strings.Length > 2 ? strings[2] : "",
-                    PhoneNumber = (string)cells[2].Value ?? "",
+                    PhoneNumber = (string)cells[3].Value ?? "",
                     Price = parsed ? price : -1
                 };
 
@@ -68,12 +70,19 @@ namespace BeautySalonAdministration
 
         private void Form3_Activated(object sender, EventArgs e)
         {
+            label1.Text = CurAppData.Manager.GetWorker(CurAppData.RealtimeData.Pos.RowIndex).WorkerType.Name;
+            label2.Text = $"{CurAppData.RealtimeData.Pos.ColumnIndex + 1} {MonthExtensions.RuMonths[CurAppData.RealtimeData.Month]}";
+
+            // добавить вид процедуры
             dataGridView1.AllowUserToAddRows = dataGridView1.AllowUserToDeleteRows = false;
 
             dataGridView1.Columns.Clear();
 
             dataGridView1.Columns.Add("column name", "Время");
             dataGridView1.Columns[0].ReadOnly = true;
+
+            dataGridView1.Columns.Add("column name", "Услуга");
+            int serviceColumnIndex = dataGridView1.Columns.Count - 1;
 
             dataGridView1.Columns.Add("column name", "ФИО");
             dataGridView1.Columns.Add("column name", "Номер");
@@ -82,10 +91,42 @@ namespace BeautySalonAdministration
 
             dataGridView1.Rows.Clear();
 
-            foreach (var item in CurDay.Records)
+            for (int i = 0; i < CurDay.Records.Count; i++)
             {
-                dataGridView1.Rows.Add($"{item.Time - item.Time % 1f}:{(item.Time % 1f * 60f).ToString().PadRight(2, '0')}", $"{item.Name} {item.Surname} {item.Patronymic}", $"{item.PhoneNumber}", $"{item.Price}");
+                Logic.Record item = CurDay.Records[i];
+                dataGridView1.Rows.Add($"{item.Time - item.Time % 1f}:{(item.Time % 1f * 60f).ToString().PadRight(2, '0')}", $"{item.ServiceType}", $"{item.Surname} {item.Name} {item.Patronymic}", $"{item.PhoneNumber}", $"{item.Price}");
+
+                AddServices(serviceColumnIndex, CurAppData.RealtimeData.Pos.RowIndex, item.ServiceType);
             }
+        }
+
+        private void AddServices(int serviceColumnIndex, int workerIndex, string defaultValue)
+        {
+            var cmbbox = new DataGridViewComboBoxCell();
+
+            foreach (var item in CurAppData.Manager.GetWorker(workerIndex).WorkerType.List)
+                cmbbox.Items.Add(item);
+
+            cmbbox.Value = defaultValue;
+
+            dataGridView1.Rows[^1].Cells[serviceColumnIndex] = cmbbox;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Next(1);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Next(-1);
+        }
+
+        private static void Next(int index)
+        {
+            CurAppData.RealtimeData.Pos.ColumnIndex = Math.Clamp(CurAppData.RealtimeData.Pos.ColumnIndex + index, 0, CurAppData.RealtimeData.Month.DaysCount() - 1);
+            CurAppData.Form3.Hide();
+            CurAppData.Form3.Show();
         }
     }
 }

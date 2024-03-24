@@ -71,19 +71,19 @@
             // 
             button1.Location = new Point(12, 309);
             button1.Name = "button1";
-            button1.Size = new Size(194, 34);
+            button1.Size = new Size(387, 34);
             button1.TabIndex = 3;
-            button1.Text = "Добавить выходной";
+            button1.Text = "Управление выходными";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(212, 309);
+            button2.Location = new Point(405, 309);
             button2.Name = "button2";
-            button2.Size = new Size(194, 34);
+            button2.Size = new Size(383, 34);
             button2.TabIndex = 4;
-            button2.Text = "Добавить работника";
+            button2.Text = "Управление работниками";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -91,12 +91,13 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 356);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(comboBox1);
             Controls.Add(label1);
+            MaximizeBox = false;
             Name = "Form2";
             Text = "Form2";
             FormClosing += Form2_FormClosing;

@@ -13,6 +13,8 @@ namespace BeautySalonAdministration
 {
     public partial class WorkerForm : Form
     {
+        public Action? NeedToRerender;
+
         public WorkerForm()
         {
             InitializeComponent();
@@ -23,13 +25,14 @@ namespace BeautySalonAdministration
             var name = textBox1.Text;
             var list = textBox2.Text;
 
-            CurAppData.Administration.WorkerTypes.Add(new Logic.WorkerType(name, [.. list.Split("\n")]));
+            CurAppData.Administration.AddWorkerType(new WorkerType(name, [.. list.Split("\n")]));
             UpdateList();
         }
 
+
         private void button2_Click(object sender, EventArgs e)
         {
-            CurAppData.Administration.WorkerTypes.RemoveAll(x => x.Name == comboBox1.Text);
+            CurAppData.Administration.RemoveWorkerType(comboBox1.Text);
             UpdateList();
         }
 
@@ -42,8 +45,18 @@ namespace BeautySalonAdministration
         private void UpdateList()
         {
             comboBox1.Items.Clear();
-            comboBox1.Items.AddRange(CurAppData.Administration.WorkerTypes.Cast<object>().ToArray());
+            comboBox1.Items.AddRange(CurAppData.Administration.GetWorkerTypes().Cast<object>().ToArray());
+            NeedToRerender?.Invoke();
             CurAppData.Save();
+        }
+
+        private void WorkerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
         }
     }
 }

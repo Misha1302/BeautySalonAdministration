@@ -78,6 +78,7 @@
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(label1);
+            MaximizeBox = false;
             Name = "Form1";
             Text = "Form1";
             FormClosing += Form1_FormClosing;

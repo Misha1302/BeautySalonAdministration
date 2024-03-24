@@ -12,7 +12,7 @@ public static class CurAppData
     public static Form Form2 = null!;
     public static Form3 Form3 = null!;
     public static HolidaysForm HolidaysForm = null!;
-    public static Form WorkerForm = null!;
+    public static WorkerForm WorkerForm = null!;
 
     public static RealtimeData RealtimeData = new();
 
