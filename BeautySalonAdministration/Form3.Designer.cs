@@ -51,7 +51,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(592, 9);
+            label2.Location = new Point(708, 9);
             label2.Name = "label2";
             label2.RightToLeft = RightToLeft.No;
             label2.Size = new Size(59, 25);
@@ -65,7 +65,7 @@
             dataGridView1.Location = new Point(12, 37);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(691, 225);
+            dataGridView1.Size = new Size(820, 325);
             dataGridView1.TabIndex = 2;
             // 
             // Column1
@@ -77,9 +77,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(130, 268);
+            button1.Location = new Point(12, 368);
             button1.Name = "button1";
-            button1.Size = new Size(456, 34);
+            button1.Size = new Size(409, 34);
             button1.TabIndex = 7;
             button1.Text = "Сохранить";
             button1.UseVisualStyleBackColor = true;
@@ -87,9 +87,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(592, 268);
+            button2.Location = new Point(432, 408);
             button2.Name = "button2";
-            button2.Size = new Size(112, 34);
+            button2.Size = new Size(400, 34);
             button2.TabIndex = 8;
             button2.Text = "=>";
             button2.UseVisualStyleBackColor = true;
@@ -97,9 +97,9 @@
             // 
             // button3
             // 
-            button3.Location = new Point(12, 268);
+            button3.Location = new Point(12, 408);
             button3.Name = "button3";
-            button3.Size = new Size(112, 34);
+            button3.Size = new Size(409, 34);
             button3.TabIndex = 9;
             button3.Text = "<=";
             button3.UseVisualStyleBackColor = true;
@@ -107,9 +107,9 @@
             // 
             // button4
             // 
-            button4.Location = new Point(130, 308);
+            button4.Location = new Point(432, 368);
             button4.Name = "button4";
-            button4.Size = new Size(456, 34);
+            button4.Size = new Size(400, 34);
             button4.TabIndex = 10;
             button4.Text = "Печать дня";
             button4.UseVisualStyleBackColor = true;
@@ -119,7 +119,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(716, 353);
+            ClientSize = new Size(852, 459);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
